@@ -3,7 +3,7 @@ const Message = require('../models/message');
 module.exports = {
   setup: (io) => {
     io.on('connection', (socket) => {
-      console.log('User connected');
+      console.log('User connected',socket.id);
 
       socket.on('chat message', async (message) => {
         // Save the message to the database

@@ -3,9 +3,12 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const apiRoutes = require('./routes/api');
 const sockets = require('./utils/sockets');
 const db = require("./utils/db")
+const authRoutes = require("./routes/auth");
+const adminRoutes = require('./routes/admin');
+const register = require("./routes/register");
+const login = require("./routes/login");
 
 const app = express();
 
@@ -29,7 +32,10 @@ const database = db;
 sockets.setup(io);
 
 // API routes
-app.use('/api', apiRoutes);
+app.use('/auth',authRoutes);
+app.use('/admin',adminRoutes);
+app.use('/api',register);
+app.use('/api',login);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
