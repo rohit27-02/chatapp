@@ -1,20 +1,23 @@
 const User = require("../models/user");
-const jwtUtils = require("../Utils/jwtUtils");
+const jwtUtils = require("../utils/jwtUtils")
 const bcrypt = require("bcrypt");
+const uuid = require('uuid');
 
 const register = async (req, res) => {
-    const { username,password,role } = req.body;
+    const { username,password,email} = req.body;
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({
             username,
+            email,
             password: hashedPassword,
-            role
+            socketid: uuid.v4()
+            
         });
         await user.save();
 
-        const token = jwtUtils.generateToken(user._id, role);
-        res.status(201).json({ message: "User created successfully", token: token })
+        const token = jwtUtils.generateToken(user._id, user.role);
+        res.status(201).json({ message: "User created successfully", token: token,username:username })
 
 
     } catch (error) {

@@ -14,5 +14,6 @@ module.exports.extractTokenFromRequest = (req) => {
 };
 
 module.exports.verifyToken = (token) => {
+    if (token == null) return null;
     return jwt.verify(token, config.secretKey);
 };

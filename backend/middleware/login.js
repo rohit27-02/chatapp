@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const jwtUtils = require("../Utils/jwtUtils");
+const jwtUtils = require("../utils/jwtUtils")
 const bcrypt = require("bcrypt");
 
 const login = async (req, res) => {
@@ -14,7 +14,7 @@ const login = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (passwordMatch) {
             const token = jwtUtils.generateToken(user._id, user.role);
-            return res.json({ message: 'Login successful', token: token });
+            return res.json({ message: 'Login successful', token: token ,username:username});
         } else {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
