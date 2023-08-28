@@ -1,7 +1,6 @@
 const User = require("../models/user");
 const jwtUtils = require("../utils/jwtUtils")
 const bcrypt = require("bcrypt");
-const uuid = require('uuid');
 
 const register = async (req, res) => {
     const { username,password,email} = req.body;
@@ -11,8 +10,9 @@ const register = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            socketid: uuid.v4()
-            
+            friends:[],
+            groups:[],
+            chatHistory:[]
         });
         await user.save();
 

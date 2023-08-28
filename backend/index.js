@@ -8,7 +8,9 @@ const db = require("./utils/db")
 const authRoutes = require("./routes/auth");
 const adminRoutes = require('./routes/admin');
 const register = require("./routes/register");
+const friends = require("./routes/friends");
 const login = require("./routes/login");
+const chat = require("./routes/chat");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
@@ -48,6 +50,8 @@ app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/api', register);
 app.use('/api', login);
+app.use('/api' ,chat);
+app.use('/api' ,friends);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
