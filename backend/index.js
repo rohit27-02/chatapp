@@ -11,8 +11,6 @@ const register = require("./routes/register");
 const friends = require("./routes/friends");
 const login = require("./routes/login");
 const chat = require("./routes/chat");
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
 
 const app = express();
 
@@ -24,15 +22,6 @@ const server = http.createServer(app);
 
 // MongoDB setup
 db
-
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URL,
-  })
-}));
 
 const io = socketIo(server, {
   cors: {
