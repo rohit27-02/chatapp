@@ -25,7 +25,7 @@ db
 
 const io = socketIo(server, {
   cors: {
-    origin: 'http://localhost:3000', // Change this to your frontend URL
+    origin: process.env.URL, // Change this to your frontend URL
     methods: ['GET', 'POST'],
     credentials: true,
   },
